@@ -71,7 +71,7 @@ $-p:$ 表示端口映射，前者是宿主机端口，后者是容器内映射�
 直接运行，占用命令行
 
 ```
-docker run -it --name=mycentos centos /bin/bash
+docker run -it --name=mycentos centos bash
 ```
 
 这种方式exit后容器直接退出
