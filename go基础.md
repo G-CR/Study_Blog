@@ -180,3 +180,67 @@ const (
 )
 ```
 
+
+
+## 数据类型
+
+多行字符串
+
+```go
+s1 := `123
+456
+789
+`
+```
+
+字符串常用操作
+
+|                方法                 |      介绍      |
+| :---------------------------------: | :------------: |
+|              len(str)               |     求长度     |
+|           +或fmt.Sprintf            |   拼接字符串   |
+|            string.Split             |      分割      |
+|          strings.Contains           |  判断是否包含  |
+| string.HasPrefix, strings.HasSuffix | 前缀/后缀判断  |
+| strings.Index(),strings.LastIndex() | 子串出现的位置 |
+| strings.Join(a[]string, sep string) |    join操作    |
+
+```go
+package main
+import (
+	"fmt"
+	"strings"
+)
+
+func main() {
+	s := "123456789"
+    fmt.Println(s)
+    
+    fmt.Println(s+s)
+    
+	a := strings.Split(s, "4")
+	fmt.Println(a)
+    
+    fmt.Println(strings.Contains(s, "456"))
+    fmt.Println(strings.Contains(s, "457"))
+    
+    
+    fmt.Println(strings.HasPrefix(s, "12345"))
+    fmt.Println(strings.HasSuffix(s, "789"))
+    
+    
+    fmt.Println(strings.Index(s, "345"))
+    
+    
+    test := make([]string, 0)
+    for i:= 0; i < 10; i++ {
+        test = append(test, "hello world")
+    }
+    
+    res := strings.Join(test, " ")
+    print(res)
+}
+```
+
+
+
