@@ -184,7 +184,7 @@ const (
 
 ## 数据类型
 
-多行字符串
+**多行字符串**
 
 ```go
 s1 := `123
@@ -193,7 +193,7 @@ s1 := `123
 `
 ```
 
-字符串常用操作
+**字符串常用操作**
 
 |                方法                 |      介绍      |
 | :---------------------------------: | :------------: |
@@ -240,6 +240,114 @@ func main() {
     res := strings.Join(test, " ")
     print(res)
 }
+```
+
+
+
+**修改字符串**
+
+对于有中文的字符串 `string` 转换成 `rune` 进行操作，只用 简答字符构成的转换成 `byte` 操作就可以了，之后转换回`string`和转成数组操作都是需要额外的时间和空间开销的
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	s := "hello"
+	s1 := []byte(s)
+	s1[0] = 'H'
+	fmt.Println(string(s1))
+	
+	t := "你好"
+	t1 := []rune(t)
+	t1[0] = '我'
+	fmt.Println(string(t1))
+}
+```
+
+
+
+## 数组
+
+### **一维数组**
+
+```go
+全局:
+var arr0 [5]int  = [5]int{1,2,3}
+var arr1 = [5]int{1,2,3,4,5}
+var arr2 = [...]int{1,2,3,4,5,6}
+var str = [5]string{3: "hello world", 4: "tom"}
+
+局部:
+a := [3]int{1,2}
+b := [...]int{1,2,3,4}
+c := [5]int{2:100, 4:200}
+d := [...]struct {
+  name string
+  age uint8
+}{
+  {"user1", 10},
+  {"user2", 20},
+}
+```
+
+
+
+### 多维数组
+
+```go
+全局:
+var arr0 [5][3]int
+var arr1 [2][3]int = [...][3]int{{1,2,3}, {7,8,9}}
+局部:
+a := [2][3]int{{1,2,3}, {4,5,6}}
+b := [...][2]int{{1,1}, {2,2}, {3,3}}
+```
+
+
+
+## 切片
+
+```go
+全局:
+var arr = [...]int{0,1,2,3,4,5,6,7,8,9}
+var slice0 []int = arr[start:end]
+var slice1 []int = arr[:end]
+var slice2 []int = arr[start:]
+var slice3 []int = arr[:]
+var slice4 = arr[:len(arr)-1] // 去掉切片的最后一个元素
+
+局部:
+arr2 = [...]int{9,8,7,6,5,4,3,2,1,0}
+slice5 := arr2[start:end]
+slice6 := arr2[:end]
+slice7 := arr2[start:]
+slice8 := arr2[:]
+slice9 := arr2[:len(arr)-1]
+```
+
+
+
+|      操作       |                             含义                             |
+| :-------------: | :----------------------------------------------------------: |
+|      s[n]       |                    切片s中索引位置为n的项                    |
+|      s[:]       |          从切片s的索引位置0到len(s)-1处所得到的切片          |
+|     s[low:]     |         从切片s的索引位置low到len(s)-1处所得到的切片         |
+|    s[:high]     |           从切片s的索引位置0到high-1处所获得的切片           |
+|   s[low:high]   |          从切片s的索引位置low到high-1处多得到的切片          |
+| s[low:high:max] | 从切片s的索引位置low到high-1处所获得的切片，len=high-low，cap=max-low |
+|     len(s)      |                   切片s的长度，总是≤cap(s)                   |
+|     cap(s)      |                   切片s的容量，总是≥len(s)                   |
+
+
+
+### 通过make来创建切片
+
+```go
+var slice []type = make([]type, len)
+slice := make([]type, len)
+slice := make([]type, len, cap)
 ```
 
 
